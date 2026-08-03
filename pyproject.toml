@@ -1,0 +1,10 @@
+[project]
+name = "scrollfit"
+version = "1.0.0"
+
+[tool.flet]
+product = "ScrollFit"
+org = "com.manumi"
+app_icon = "assets/logo.png"
+adaptive_icon_background = "#FFFFFF"
+adaptive_icon_foreground = "assets/logo.png"

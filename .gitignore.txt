@@ -1,0 +1,5 @@
+build/
+flutter/
+.idea/
+_pyache_/
+*.pyc
