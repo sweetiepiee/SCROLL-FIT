@@ -10,16 +10,17 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
   cupertino_icons: ^1.0.8
-  flet: 0.86.1
-  serious_python: 4.3.3
+  flet: 0.86.5
+  serious_python: 4.5.1
   msgpack_dart: ^1.0.1
   package_info_plus: ^9.0.0
   path_provider: ^2.1.4
   path: ^1.9.0
   window_manager: ^0.5.1
 dependency_overrides:
-  flet: 0.86.1
+  flet: 0.86.5
   screen_retriever: 0.2.1
+  jni: 1.0.0
 dev_dependencies:
   flutter_launcher_icons: ^0.14.1
   flutter_native_splash: ^2.4.1

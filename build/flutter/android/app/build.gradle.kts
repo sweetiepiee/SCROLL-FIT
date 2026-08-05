@@ -44,6 +44,8 @@ android {
             // only opens a hole for the matching glob; any other future duplicate-native-lib conflict still fails loudly.
             pickFirsts += listOf("**/libc++_shared.so")
 
+// flet: legacy_packaging 
+
 // flet: excluded_abis 
         }
     }

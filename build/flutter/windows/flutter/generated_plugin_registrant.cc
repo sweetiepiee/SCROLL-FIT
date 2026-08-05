@@ -8,8 +8,7 @@
 
 #include <battery_plus/battery_plus_windows_plugin.h>
 #include <connectivity_plus/connectivity_plus_windows_plugin.h>
-#include <pasteboard/pasteboard_plugin.h>
-#include <screen_brightness_windows/screen_brightness_windows_plugin_c_api.h>
+#include <screen_brightness_windows/screen_brightness_windows_plugin.h>
 #include <screen_retriever_windows/screen_retriever_windows_plugin_c_api.h>
 #include <serious_python_windows/serious_python_windows_plugin_c_api.h>
 #include <share_plus/share_plus_windows_plugin_c_api.h>
@@ -21,10 +20,8 @@ void RegisterPlugins(flutter::PluginRegistry* registry) {
       registry->GetRegistrarForPlugin("BatteryPlusWindowsPlugin"));
   ConnectivityPlusWindowsPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("ConnectivityPlusWindowsPlugin"));
-  PasteboardPluginRegisterWithRegistrar(
-      registry->GetRegistrarForPlugin("PasteboardPlugin"));
-  ScreenBrightnessWindowsPluginCApiRegisterWithRegistrar(
-      registry->GetRegistrarForPlugin("ScreenBrightnessWindowsPluginCApi"));
+  ScreenBrightnessWindowsPluginRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("ScreenBrightnessWindowsPlugin"));
   ScreenRetrieverWindowsPluginCApiRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("ScreenRetrieverWindowsPluginCApi"));
   SeriousPythonWindowsPluginCApiRegisterWithRegistrar(
