@@ -46,6 +46,12 @@ def main(page: ft.Page):
         on_click=start_clicked,
     )
 
+    start_button = ft.ElevatedButton(
+        text="Get Started!",
+        width = 220,
+        height=55,
+        on_click=start_clicked, #Calls the function when clicked
+    )
     #Add everything to the page
     page.add(
         ft.Column(
