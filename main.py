@@ -1,73 +1,114 @@
-import flet as ft
+from flet import *
+from login import login_page
 
 #Main function that runs the app
-def main(page: ft.Page):
+def main(page:Page):
 
-    page.title = "ScrollFit"
+    page.title = "Fit Scroll"
 
-    #Android screen size
-    page.window.width = 380
-    page.window.height = 850
-    page.window.resizeable = False
+    #Set the background outside the phone
+    page.bgcolor = "#0808085F"
+    page.window.width = 460
+    page.window.height = 900
+    
 
-    #Set the background color
-    page.bgcolor = "#FFFFFF"
-
-    def start_clicked(e):
-        page.clean()
-
-        #Display a welcome message
-        page.add(
-            ft.Text('Welcome to ScrollFit!',
-                    size=30,
-                    weight=ft.FontWeight.BOLD
-                    )
-        )
+    #Phone container
+    container = Container(
+        width = 400,
+        height = 850,
+        bgcolor = "#FFF4C7",
+        border_radius=35,
+        content=Column(
+            controls=[],
+        ),
+    )
 
     #APP LOGO
-    logo = ft.Image(
-        src = "assests/logo.png",
-        width=150,
-        height=150,
-        fit=ft.ImageFit.CONTAIN,
+    logo = Image(
+        src = "logo.png",
+        width=350,
+        height=400,
+        fit=BoxFit.CONTAIN,
     )
 
-    title = ft.Text(
-        "ScrollFit",
+    title = Text(
+        "Fit Scroll",
         size=40,
-        weight=ft.FontWeight.BOLD,
-        color = "#DB891D",
+        weight=FontWeight.BOLD,
+        font_family = "Fredoka",
+        color = "#E78E19",
+        text_align=TextAlign.CENTER,
     )
-
-    description = ft.Text(
+    
+    description = Text(
         "Move more. Scroll less.",
-        width=220,
-        height=55,
-        on_click=start_clicked,
+        font_family="Fredoka",
+        size=20,
+        weight=FontWeight.W_500,
+        color="#E76119",
+        text_align=TextAlign.CENTER,
     )
-
-    start_button = ft.ElevatedButton(
-        text="Get Started!",
+    
+    start_button = Button(
+        "Get Started!",
         width = 220,
         height=55,
-        on_click=start_clicked, #Calls the function when clicked
+        style=ButtonStyle(
+            text_style=TextStyle(
+                font_family="Fredoka",
+                size=20,
+                weight=FontWeight.BOLD,
+            ),
+            color = Colors.WHITE,
+            bgcolor = "#FF7890",
+            shape = RoundedRectangleBorder(radius=30),
+            elevation = 5,
+            shadow_color = "#E85F78",
+        ),
+        on_click=lambda e: login_page(page), #Calls the function when clicked
+    )
+
+    #Fake Phone Camera
+    camera = Container(
+        width=120,
+        height=32,
+        bgcolor="#000000",
+        border_radius=20,
+        ignore_interactions=True,
     )
     #Add everything to the page
-    page.add(
-        ft.Column(
-            [logo,
-             title,
-             description,
-             ft.Container(height=40),
-             start_button,
-             ],
-             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-             alignment=ft.MainAxisAlignment.CENTER,
-             expand=True,
-            )
+    container.content = Stack(
+        controls=[
+            Column(
+                controls=[
+                    Container(height=80),
+                    logo,
+                    title,
+                    description,
+                    Container(height=40),
+                    start_button,
+                ],
+                horizontal_alignment=CrossAxisAlignment.CENTER,
+            ),
+
+            Container(
+                alignment=Alignment(0, -0.95),
+                content=camera,
+                ignore_interactions=True,
+            ),
+        ],
 
     )
-
-#Start the app
-ft.run(main)
     
+
+        
+    page.add(
+        Container(
+            expand=True,
+            alignment=Alignment(0,0),
+            content=container,
+        )
+    )
+
+#Start the app"
+run(main, assets_dir="assets")
