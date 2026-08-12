@@ -1,4 +1,6 @@
 from flet import *
+#Imports the function used to save and find user accounts
+from userdata import save_user, get_user
 
 #Function that creates and displays the sign-up page
 def signup_page(page, go_to_login):
@@ -27,6 +29,22 @@ def signup_page(page, go_to_login):
     #Creates the full name input field
     full_name = TextField(
         hint_text="Full Name",
+        prefix_icon=Icons.PERSON_ROUNDED,
+        width=280,
+        height=52,
+        border_radius=25,
+        bgcolor='#FFFFFF',
+        border_color="#FFD1DC",
+        focused_border_color="#FF7890",
+        text_style=TextStyle(
+            font_family="Fredoka",
+            size=16,
+        ),
+    )
+
+    #Creates the username input field
+    username = TextField(
+        hint_text="Username",
         prefix_icon=Icons.PERSON_ROUNDED,
         width=280,
         height=52,
@@ -164,11 +182,31 @@ def signup_page(page, go_to_login):
     )
 
     #SIGN UP FUNCTION
+
+    #Function that displays a message to the user
+    def show_message(message):
+
+        #Creates a SnackBar containing the message
+        page.snack_bar = SnackBar(
+            content=Text(
+                message,
+                font_family="Fredoka",
+                color=Colors.WHITE,
+            ),
+        )
+
+        #Opens the SnackBar
+        page.snack_bar.open = True
+
+        #Updates the page so the message appears
+        page.update()
+        
     #Function that runs when sign-up button is clicked
     def signup(e):
         #Checks that all fields have been completed
         if(
             full_name.value
+            and username.value
             and date_of_birth.value
             and email.value
             and password.value
@@ -176,12 +214,47 @@ def signup_page(page, go_to_login):
             and fitness_level.value
             and fitness_goal.value
         ):
-            #Checks whether the passwords match
-            if password.value == confirm_password.value:
-                print("Sign Up Successful!")
-            else:
-                print("Passworrds do not match!")
+            #Checks whether the password and confirmation password are the same
+            if password.value != confirm_password.value:
+
+                #Displays a message in the terminal if the passwords do not match
+                show_message("Passwords do not match!")
+
+                #Stops the function from contuining
+                return
+
+            #Checks whether the username has already been registered
+            if get_user(username.value):
+
+                #Displays a message if the username already exists
+                show_message("Username already exists!")
+
+                #Stops the function from contuining
+                return
+
+            #Creates a dictionary containing all of the user's information
+            user = {
+                "username": username.value,
+                "full_name": full_name.value,
+                "date_of_birth": date_of_birth.value,
+                "email": email.value,
+                "password": password.value,
+                "fitness_level": fitness_level.value,
+                "fitness_goal": fitness_goal.value,
+            }
+
+            #Saves the new user's information to the JSON file
+            save_user(user)
+
+            #Shows a success message inside the app
+            show_message("Sign Up Successful!")
+
+            #Returns the user to the login page
+            go_to_login()
+
         else:
+
+            #Displays a message if one or more fields are empty
             print("Please complete all fields.")
 
      #SIGN UP BUTTON
