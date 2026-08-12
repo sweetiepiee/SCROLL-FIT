@@ -182,25 +182,24 @@ def signup_page(page, go_to_login):
     )
 
     #SIGN UP FUNCTION
-
+    #Creates a text control for displaying messages to the user
+    message_text = Text(
+        "",
+        size = 14,
+        font_family="Fredoka",
+        weight=FontWeight.BOLD,
+        color="#FF7890",
+        text_align=TextAlign.CENTER
+    )
     #Function that displays a message to the user
-    def show_message(message):
+    def show_message(text):
 
-        #Creates a SnackBar containing the message
-        page.snack_bar = SnackBar(
-            content=Text(
-                message,
-                font_family="Fredoka",
-                color=Colors.WHITE,
-            ),
-        )
-
-        #Opens the SnackBar
-        page.snack_bar.open = True
+        #Changes the message displayed on the page
+        message_text.value = text
 
         #Updates the page so the message appears
         page.update()
-        
+
     #Function that runs when sign-up button is clicked
     def signup(e):
         #Checks that all fields have been completed
@@ -255,7 +254,7 @@ def signup_page(page, go_to_login):
         else:
 
             #Displays a message if one or more fields are empty
-            print("Please complete all fields.")
+            show_message("Please complete all fields.")
 
      #SIGN UP BUTTON
      # #Creates the green sign-up button
@@ -334,6 +333,8 @@ def signup_page(page, go_to_login):
             Container(height=40),
             full_name,
             Container(height=7),
+            username,
+            Container(height=7),
             date_of_birth,
             Container(height=7),
             email,
@@ -348,6 +349,8 @@ def signup_page(page, go_to_login):
             Container(height=20),
             signup_button,
             Container(height=30),
+            message_text,
+            Container(height=20),
             login_text,
             Container(height=30),
         ],
