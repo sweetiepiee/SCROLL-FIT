@@ -1,5 +1,6 @@
 from flet import *
 from login import login_page
+from home import home_page
 
 #Main function that runs the app
 def main(page:Page):
@@ -10,7 +11,12 @@ def main(page:Page):
     page.bgcolor = "#0808085F"
     page.window.width = 460
     page.window.height = 900
-    
+
+    #Function that opens the home page after a succcessful login
+    def open_home(user):
+
+        #Displays the home page using the logges-in user's information
+        home_page(page,user)
 
     #Phone container
     container = Container(
@@ -65,7 +71,7 @@ def main(page:Page):
             elevation = 5,
             shadow_color = "#E85F78",
         ),
-        on_click=lambda e: login_page(page), #Calls the function when clicked
+        on_click=lambda e: login_page(page, open_home), #Calls the function when clicked
     )
 
     #Fake Phone Camera
