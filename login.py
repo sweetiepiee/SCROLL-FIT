@@ -1,5 +1,6 @@
 from flet import *
 from signup import signup_page
+from userdata import get_user
 
 #Function that creates and displays the login page
 def login_page(page):
@@ -53,13 +54,56 @@ def login_page(page):
         ),
     )
 
+    #Creates a text control for displaying login messages
+    message_text = Text(
+        "",
+        size=14,
+        font_family="Fredoka",
+        weight=FontWeight.BOLD,
+        color="#FF7890",
+        text_align=TextAlign.CENTER,
+    )
+
     #Function that runs when the login button is clicked
     def login(e):
 
         #Checks that both username and password fields are filled in
         if username.value and password.value:
-            print("Login Successful!")
 
+            #Searches for the account using the entered username
+            user = get_user(username.value)
+
+            #Checks whether the username exists and the password is correct
+            if user and user["password"] == password.value:
+
+                #Displays a successful login message inside the app
+                message_text.value = "Login Successful!"
+
+                #Changes the message colour to green
+                message_text.color = "#4CAF50"
+
+                #Updates the page so the message appears
+                page.update()
+
+            else:
+                #Displays an error message inside the app
+                message_text.value = "Incorrect usernamed or password!"
+
+                #Changes the message colour to pink
+                message_text.color = "#FF7890"
+
+                #Updates the page so the message appears
+                page.update()
+
+        else:
+            #Displays an error message if a field is empty
+            message_text.value = "Please enter your username and/or password."
+
+            #Changes the message colour to pink
+            message_text.color = "#FF7890"
+        
+            #Updates the page so the message appears
+            page.update()                  
 
     #Creates the login button
     login_button = ElevatedButton(
@@ -129,6 +173,8 @@ def login_page(page):
                         Container(height=8),
                         password,
                         Container(height=30),
+                        message_text,
+                        Container(height=20),
                         login_button,
                         Container(height=25),
 
