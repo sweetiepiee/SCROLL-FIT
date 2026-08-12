@@ -49,7 +49,7 @@ def main(page:Page):
         text_align=TextAlign.CENTER,
     )
     
-    start_button = Button(
+    start_button = ElevatedButton(
         "Get Started!",
         width = 220,
         height=55,
