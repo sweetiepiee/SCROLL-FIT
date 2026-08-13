@@ -3,7 +3,7 @@ from signup import signup_page
 from userdata import get_user
 
 #Function that creates and displays the login page
-def login_page(page):
+def login_page(page, on_login):
     page.clean()
 
     #Sets the background colour outside the phone
@@ -85,6 +85,9 @@ def login_page(page):
                 #Updates the page so the message appears
                 page.update()
 
+                #Opens the home page using the logged-in user's information
+                on_login(user)
+                
             else:
                 #Displays an error message inside the app
                 message_text.value = "Incorrect usernamed or password!"
@@ -130,7 +133,7 @@ def login_page(page):
         "SIGN UP",
         width= 280,
         height=55,
-        on_click=lambda e: signup_page(page, lambda: login_page(page)),
+        on_click=lambda e: signup_page(page, lambda: login_page(page, on_login)),
         style=ButtonStyle(
             bgcolor = "#A8E6A3",
             color= "#333333",

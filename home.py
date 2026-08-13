@@ -20,6 +20,7 @@ def home_page(page, user):
         #Displays the profile page using logged-in user's information
         profile_page(page, user)
 
+
     #Creates the page title
     page_title = Text(
         "HOME",
@@ -131,7 +132,7 @@ def home_page(page, user):
     #Temporary placeholders for now
     leaderboard = Container(
         width=280,
-        height=145,
+        height=120,
         bgcolor="#FFFFFF",
         border_radius=15,
         border=Border.all(2, "#FFD1DC"),
@@ -200,7 +201,7 @@ def home_page(page, user):
     #Creates the HOME navigation button
     home_button = ElevatedButton(
         "HOME",
-        width=85,
+        width=80,
         height=35,
 
         #The user is already on the home page
@@ -219,10 +220,10 @@ def home_page(page, user):
         ),
     )
 
-#Creates the CHALLENGE navigation button
+    #Creates the CHALLENGE navigation button
     challenge_button = ElevatedButton(
         "CHALLENGE",
-        width=85,
+        width=80,
         height=35,
 
         #Will be connected later
@@ -253,7 +254,7 @@ def home_page(page, user):
     #Creates the main home page content
     home_content = Column(
         controls=[
-            Container(height=45),
+            Container(height=65),
             page_title,
             Container(height=5),
             welcome_text,
@@ -280,7 +281,7 @@ def home_page(page, user):
                 ],
 
                 alignment=MainAxisAlignment.CENTER,
-                spacing=5,
+                spacing=3,
             ),
         ],
 

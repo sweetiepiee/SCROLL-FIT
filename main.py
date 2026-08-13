@@ -12,6 +12,10 @@ def main(page:Page):
     page.window.width = 460
     page.window.height = 900
 
+    #Function that opens the login page
+    def open_login(e):
+        login_page(page, open_home)
+
     #Function that opens the home page after a succcessful login
     def open_home(user):
 
@@ -24,7 +28,8 @@ def main(page:Page):
         height = 850,
         bgcolor = "#FFF4C7",
         border_radius=35,
-        content=Column(
+        content=
+        Column(
             controls=[],
         ),
     )
@@ -71,7 +76,7 @@ def main(page:Page):
             elevation = 5,
             shadow_color = "#E85F78",
         ),
-        on_click=lambda e: login_page(page, open_home), #Calls the function when clicked
+        on_click=open_login, #Calls the function when clicked
     )
 
     #Fake Phone Camera

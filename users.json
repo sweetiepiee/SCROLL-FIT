@@ -1,0 +1,29 @@
+{
+    "sweetiepie": {
+        "username": "sweetiepie",
+        "full_name": "Manumi Vithumsa",
+        "date_of_birth": "27/12/2009",
+        "email": "manumivithumsa20092@gmail.com",
+        "password": "Manumi2009",
+        "fitness_level": "Beginner",
+        "fitness_goal": "Lose Weight"
+    },
+    "Saanvi": {
+        "username": "Saanvi",
+        "full_name": "Saanvi Sringere",
+        "date_of_birth": "30/03/2010",
+        "email": "24616@apps.eggs.school.nz",
+        "password": "1234",
+        "fitness_level": "Intermediate",
+        "fitness_goal": "Build Up Muscle"
+    },
+    "reet.m10": {
+        "username": "reet.m10",
+        "full_name": "Reet Munjal",
+        "date_of_birth": "10/09/2009",
+        "email": "reetm1009@gmail.com",
+        "password": "sunshine8901",
+        "fitness_level": "Advanced",
+        "fitness_goal": "Build Up Muscle"
+    }
+}

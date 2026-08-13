@@ -256,8 +256,8 @@ def signup_page(page, go_to_login):
             #Displays a message if one or more fields are empty
             show_message("Please complete all fields.")
 
-     #SIGN UP BUTTON
-     # #Creates the green sign-up button
+    #SIGN UP BUTTON
+    # #Creates the green sign-up button
     signup_button = ElevatedButton(
         "SIGN UP",
         width=280,
