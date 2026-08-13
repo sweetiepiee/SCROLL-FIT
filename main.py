@@ -1,42 +1,87 @@
 from flet import *
 from login import login_page
 from home import home_page
+from profile import profile_page
+from workout import workout_page
 
-#Main function that runs the app
-def main(page:Page):
+
+# Main function that runs the app
+def main(page: Page):
 
     page.title = "Fit Scroll"
 
-    #Set the background outside the phone
+    # Set the background outside the phone
     page.bgcolor = "#0808085F"
     page.window.width = 460
     page.window.height = 900
 
-    #Function that opens the login page
-    def open_login(e):
+    # Stores the currently logged-in user
+    current_user = None
+
+    # --------------------------------------------------
+    # LOGIN
+    # --------------------------------------------------
+
+    def open_login(e=None):
         login_page(page, open_home)
 
-    #Function that opens the home page after a succcessful login
+    # --------------------------------------------------
+    # HOME
+    # --------------------------------------------------
+
     def open_home(user):
+        nonlocal current_user
+        current_user = user
 
-        #Displays the home page using the logges-in user's information
-        home_page(page,user)
+        home_page(page, current_user)
 
-    #Phone container
+    # --------------------------------------------------
+    # PROFILE
+    # --------------------------------------------------
+
+    def open_profile(e=None):
+        if current_user:
+            profile_page(
+                page,
+                current_user,
+                go_home=open_home_current,
+                go_workout=open_workout,
+                go_login=open_login
+            )
+
+    # --------------------------------------------------
+    # HOME FROM NAVIGATION
+    # --------------------------------------------------
+
+    def open_home_current(e=None):
+        if current_user:
+            home_page(page, current_user)
+
+    # --------------------------------------------------
+    # WORKOUT
+    # --------------------------------------------------
+
+    def open_workout(e=None):
+        if current_user:
+            workout_page(
+                page,
+                current_user
+            )
+
+    # --------------------------------------------------
+    # STARTING SCREEN
+    # --------------------------------------------------
+
     container = Container(
-        width = 400,
-        height = 850,
-        bgcolor = "#FFF4C7",
+        width=400,
+        height=850,
+        bgcolor="#FFE5C7",
         border_radius=35,
-        content=
-        Column(
-            controls=[],
-        ),
     )
 
-    #APP LOGO
+    # APP LOGO
     logo = Image(
-        src = "logo.png",
+        src="logo.png",
         width=350,
         height=400,
         fit=BoxFit.CONTAIN,
@@ -46,11 +91,11 @@ def main(page:Page):
         "Fit Scroll",
         size=40,
         weight=FontWeight.BOLD,
-        font_family = "Fredoka",
-        color = "#E78E19",
+        font_family="Fredoka",
+        color="#E78E19",
         text_align=TextAlign.CENTER,
     )
-    
+
     description = Text(
         "Move more. Scroll less.",
         font_family="Fredoka",
@@ -59,10 +104,10 @@ def main(page:Page):
         color="#E76119",
         text_align=TextAlign.CENTER,
     )
-    
+
     start_button = ElevatedButton(
         "Get Started!",
-        width = 220,
+        width=220,
         height=55,
         style=ButtonStyle(
             text_style=TextStyle(
@@ -70,16 +115,16 @@ def main(page:Page):
                 size=20,
                 weight=FontWeight.BOLD,
             ),
-            color = Colors.WHITE,
-            bgcolor = "#FF7890",
-            shape = RoundedRectangleBorder(radius=30),
-            elevation = 5,
-            shadow_color = "#E85F78",
+            color=Colors.WHITE,
+            bgcolor="#FF7890",
+            shape=RoundedRectangleBorder(radius=30),
+            elevation=5,
+            shadow_color="#E85F78",
         ),
-        on_click=open_login, #Calls the function when clicked
+        on_click=open_login,
     )
 
-    #Fake Phone Camera
+    # Fake Phone Camera
     camera = Container(
         width=120,
         height=32,
@@ -87,7 +132,8 @@ def main(page:Page):
         border_radius=20,
         ignore_interactions=True,
     )
-    #Add everything to the page
+
+    # Add everything to the page
     container.content = Stack(
         controls=[
             Column(
@@ -108,18 +154,16 @@ def main(page:Page):
                 ignore_interactions=True,
             ),
         ],
-
     )
-    
 
-        
     page.add(
         Container(
             expand=True,
-            alignment=Alignment(0,0),
+            alignment=Alignment(0, 0),
             content=container,
         )
     )
 
-#Start the app"
-run(main, assets_dir="assets")
+
+# Start the app
+run(main)

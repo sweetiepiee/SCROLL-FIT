@@ -39,6 +39,7 @@ def signup_page(page, go_to_login):
         text_style=TextStyle(
             font_family="Fredoka",
             size=16,
+            color="#050505",
         ),
     )
 
@@ -55,6 +56,7 @@ def signup_page(page, go_to_login):
         text_style=TextStyle(
             font_family="Fredoka",
             size=16,
+            color="#050505",
         ),
     )
 
@@ -71,6 +73,7 @@ def signup_page(page, go_to_login):
         text_style=TextStyle(
             font_family="Fredoka",
             size=16,
+            color="#050505",
         ),
 
     )
@@ -88,6 +91,7 @@ def signup_page(page, go_to_login):
         text_style=TextStyle(
             font_family="Fredoka",
             size=16,
+            color="#050505",
         ),
     )
 
@@ -106,6 +110,7 @@ def signup_page(page, go_to_login):
         text_style=TextStyle(
             font_family="Fredoka",
             size=16,
+            color="#050505",
         ),
     )
 
@@ -124,6 +129,7 @@ def signup_page(page, go_to_login):
         text_style=TextStyle(
             font_family="Fredoka",
             size=16,
+            color="#050505",
         ),
     )
 

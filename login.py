@@ -33,6 +33,7 @@ def login_page(page, on_login):
         text_style = TextStyle(
             font_family="Fredoka",
             size=16,
+            color="#050505"
         ),
     )
 
@@ -51,6 +52,7 @@ def login_page(page, on_login):
         text_style=TextStyle(
             font_family="Fredoka",
             size=16,
+            color="#050505"
         ),
     )
 

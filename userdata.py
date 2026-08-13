@@ -1,43 +1,51 @@
 import json
 import os
 
-#Name of the file where all user account information will be stored
-FILE_NAME = "users.json"
+# Gets the folder where userdata.py is located
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-#Function that loads all saved users from the JSON file
+# Stores users.json in the same folder as userdata.py
+FILE_NAME = os.path.join(BASE_DIR, "users.json")
+
+
+# Function that loads all saved users
 def load_users():
 
-    #Checks whether the users.json file exists
+    # Checks whether users.json exists
     if not os.path.exists(FILE_NAME):
+        return {}
 
-        #Returns an empty dictionary if no users have been saved yet
-        return{}
+    try:
+        # Opens and reads the saved user information
+        with open(FILE_NAME, "r", encoding="utf-8") as file:
+            users = json.load(file)
 
-    #Opens the JSON file and reads the saved user information
-    with open(FILE_NAME, "r") as file:
-        users = json.load(file)
+        return users
 
-    #Returns all saved users
-    return users
+    except (json.JSONDecodeError, OSError):
+        # If the file cannot be read, return an empty dictionary
+        return {}
 
-#Function that saves a new user's information
+
+# Function that saves a new user's information
 def save_user(user):
 
-    #Load all currently saved users
+    # Loads all currently saved users
     users = load_users()
 
-    #Uses the username as the key for the user's information
+    # Uses username as the key
     users[user["username"]] = user
 
-    #Opens the JSON file and saves the updated user information
-    with open (FILE_NAME, "w") as file:
+    # Saves the updated users
+    with open(FILE_NAME, "w", encoding="utf-8") as file:
         json.dump(users, file, indent=4)
 
-#Function that searches for a user using their username
+
+# Function that searches for a user
 def get_user(username):
 
-    #Loads all saved users
+    # Loads all saved users
     users = load_users()
 
-    #Returns the user's information if the username exists
+    # Returns the user's information
     return users.get(username)

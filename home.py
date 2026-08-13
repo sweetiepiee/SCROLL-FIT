@@ -1,5 +1,7 @@
+# Home page layout
 from flet import *
 from profile import profile_page 
+from workout import workout_page
 
 #Function that creates and displays the home page
 def home_page(page, user):
@@ -93,13 +95,13 @@ def home_page(page, user):
     )
 
     #Creates the workout button
-    workout_button = ElevatedButton(
+    start_workout_button = ElevatedButton(
         "START WORKOUT",
         width=300,
         height=60,
 
         #The workout page will be connected here later
-        on_click=lambda e: None,
+        on_click=lambda e: workout_page(page, user),
 
         style=ButtonStyle(
             bgcolor="#FF7890",
@@ -220,13 +222,13 @@ def home_page(page, user):
     )
 
     #Creates the CHALLENGE navigation button
-    challenge_button = ElevatedButton(
-        "CHALLENGE",
+    workout_button = ElevatedButton(
+        "WORKOUT",
         width=120,
         height=45,
 
         #Will be connected later
-        on_click=lambda e: None,
+        on_click=lambda e: workout_page(page, user, lambda: home_page(page, user)),
 
         style=ButtonStyle(
             bgcolor="#A8E6A3",
@@ -247,7 +249,7 @@ def home_page(page, user):
         controls=[
             profile_button,
             home_button,
-            challenge_button,
+            workout_button,
         ],
 
         alignment=MainAxisAlignment.CENTER,
@@ -271,7 +273,7 @@ def home_page(page, user):
             Container(height=20),
             streak_card,
             Container(height=22),
-            workout_button,
+            start_workout_button,
             Container(height=25),
             leaderboard_title,
             Container(height=8),
