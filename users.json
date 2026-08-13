@@ -25,5 +25,32 @@
         "password": "sunshine8901",
         "fitness_level": "Advanced",
         "fitness_goal": "Build Up Muscle"
+    },
+    "laaibah": {
+        "username": "laaibah",
+        "full_name": "laaibah",
+        "date_of_birth": "13th august 2026",
+        "email": "manumia@gmail.com",
+        "password": "hello",
+        "fitness_level": "Beginner",
+        "fitness_goal": "Lose Weight"
+    },
+    "su": {
+        "username": "su",
+        "full_name": "hui",
+        "date_of_birth": "09/09/2001",
+        "email": "shui3683@gmail.com",
+        "password": "111111",
+        "fitness_level": "Advanced",
+        "fitness_goal": "Lose Weight"
+    },
+    "dayaratne": {
+        "username": "dayaratne",
+        "full_name": "ineshka",
+        "date_of_birth": "21/06/09",
+        "email": "asdfghjkl",
+        "password": "Laaibah67",
+        "fitness_level": "Intermediate",
+        "fitness_goal": "Stay Active"
     }
 }

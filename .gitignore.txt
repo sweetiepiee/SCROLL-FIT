@@ -1,5 +1,15 @@
-build/
-flutter/
-.idea/
-_pyache_/
+# Python cache
+__pycache__/
 *.pyc
+
+# Flet generated files
+.flet/
+build/
+new_apk/
+
+# IDE settings
+.idea/
+.vscode/
+
+# Temporary/system files
+desktop.ini
