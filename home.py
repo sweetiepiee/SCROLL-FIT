@@ -34,7 +34,11 @@ def home_page(page, user, go_profile=None, go_workout=None):
         if go_workout:
             go_workout(e)
         else:
-            workout_page(page, user, go_home=lambda e: home_page(page, user))
+            workout_page(
+                page,
+                user,
+                go_home=lambda e: home_page(page, user)
+            )
 
     # --------------------------------------------------
     # WELCOME
@@ -132,46 +136,125 @@ def home_page(page, user, go_profile=None, go_workout=None):
 
     leaderboard_title = Text(
         "LEADERBOARD",
-        size=18,
+        size=21,
         weight=FontWeight.BOLD,
         font_family="Fredoka",
         color="#E9A53F",
         text_align=TextAlign.CENTER,
     )
 
+    # 1st place
+    first_place = Row(
+        controls=[
+            Text(
+                "🥇",
+                size=18,
+            ),
+
+            Text(
+                "Person 01",
+                size=14,
+                font_family="Fredoka",
+                weight=FontWeight.BOLD,
+                color="#333333",
+                expand=True,
+            ),
+
+            Text(
+                "120 pts",
+                size=13,
+                font_family="Fredoka",
+                color="#8D6E63",
+            ),
+        ],
+        spacing=8,
+    )
+
+    # 2nd place
+    second_place = Row(
+        controls=[
+            Text(
+                "🥈",
+                size=18,
+            ),
+
+            Text(
+                "Person 02",
+                size=14,
+                font_family="Fredoka",
+                weight=FontWeight.BOLD,
+                color="#333333",
+                expand=True,
+            ),
+
+            Text(
+                "95 pts",
+                size=13,
+                font_family="Fredoka",
+                color="#8D6E63",
+            ),
+        ],
+        spacing=8,
+    )
+
+    # 3rd place - current user
+    third_place = Row(
+        controls=[
+            Text(
+                "🥉",
+                size=18,
+            ),
+
+            Text(
+                user_name,
+                size=14,
+                font_family="Fredoka",
+                weight=FontWeight.BOLD,
+                color="#E78E19",
+                expand=True,
+            ),
+
+            Text(
+                "80 pts",
+                size=13,
+                font_family="Fredoka",
+                weight=FontWeight.BOLD,
+                color="#E78E19",
+            ),
+        ],
+        spacing=8,
+    )
+
     leaderboard = Container(
-        width=280,
-        height=175,
+        width=300,
+        height=150,
         bgcolor="#FFFFFF",
-        border_radius=18,
-        border=Border.all(2, "#FFD1DC"),
-        padding=10,
+        border_radius=20,
+        border=Border.all(
+            2,
+            "#FFD1DC",
+        ),
+        padding=15,
+
         content=Column(
             controls=[
-                Text(
-                    "🥇 Person 01",
-                    size=12,
-                    font_family="Fredoka",
-                    color="#333333",
+                first_place,
+
+                Divider(
+                    height=1,
+                    color="#FFD1DC",
                 ),
 
-                Text(
-                    "🥈 Person 02",
-                    size=12,
-                    font_family="Fredoka",
-                    color="#333333",
+                second_place,
+
+                Divider(
+                    height=1,
+                    color="#FFD1DC",
                 ),
 
-                Text(
-                    f"🥉 {user_name}",
-                    size=12,
-                    weight=FontWeight.BOLD,
-                    font_family="Fredoka",
-                    color="#E78E19",
-                ),
+                third_place,
             ],
-            horizontal_alignment=CrossAxisAlignment.CENTER,
-            spacing=7,
+            spacing=6,
         ),
     )
 
@@ -265,6 +348,8 @@ def home_page(page, user, go_profile=None, go_workout=None):
 
             welcome_text,
 
+            Container(height=2),
+
             subtitle,
 
             Container(height=20),
@@ -282,9 +367,8 @@ def home_page(page, user, go_profile=None, go_workout=None):
             Container(height=8),
 
             leaderboard,
-
-            Container(height=15),
         ],
+
         horizontal_alignment=CrossAxisAlignment.CENTER,
         spacing=0,
     )
@@ -300,8 +384,14 @@ def home_page(page, user, go_profile=None, go_workout=None):
         border_radius=35,
     )
 
+    # --------------------------------------------------
+    # PHONE CONTENT
+    # --------------------------------------------------
+
     phone.content = Stack(
         controls=[
+
+            # Main home content
             home_content,
 
             # Bottom navigation

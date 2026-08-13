@@ -21,9 +21,9 @@ def workout_page(page, user, go_home=None, go_profile=None):
 
         page.clean()
 
-        # -----------------------------
-        # TIMER VARIABLES
-        # -----------------------------
+        # ==================================================
+        # TIMER
+        # ==================================================
 
         seconds = 0
         timer_running = False
@@ -122,7 +122,6 @@ def workout_page(page, user, go_home=None, go_profile=None):
 
                     camera_text.value = "No camera found 📷"
                     page.update()
-
                     return
 
                 await camera.initialize(
@@ -193,7 +192,7 @@ def workout_page(page, user, go_home=None, go_profile=None):
             )
 
         # ==================================================
-        # BUTTONS
+        # TIMER BUTTONS
         # ==================================================
 
         start_button = ElevatedButton(
@@ -307,14 +306,12 @@ def workout_page(page, user, go_home=None, go_profile=None):
 
                 Container(height=10),
 
-                # CAMERA
                 camera_box,
 
                 camera_text,
 
                 Container(height=8),
 
-                # TIMER
                 timer_text,
 
                 Row(
@@ -329,7 +326,6 @@ def workout_page(page, user, go_home=None, go_profile=None):
 
                 Container(height=12),
 
-                # EXERCISES
                 Column(
                     controls=exercise_controls,
                     horizontal_alignment=CrossAxisAlignment.CENTER,
@@ -349,7 +345,7 @@ def workout_page(page, user, go_home=None, go_profile=None):
         )
 
         # ==================================================
-        # PHONE
+        # EXERCISE PHONE
         # ==================================================
 
         phone = Container(
@@ -361,7 +357,6 @@ def workout_page(page, user, go_home=None, go_profile=None):
         )
 
         page.add(
-
             Container(
                 expand=True,
                 alignment=Alignment(0, 0),
@@ -371,14 +366,15 @@ def workout_page(page, user, go_home=None, go_profile=None):
 
         page.update()
 
-        # INITIALISE CAMERA AFTER IT HAS BEEN ADDED TO THE PAGE
         page.run_task(initialize_camera)
 
     # ==================================================
-    # WORKOUTS
+    # WORKOUT FUNCTIONS
     # ==================================================
 
     def full_body(e):
+
+        print("FULL BODY CLICKED")
 
         exercise_page(
             "FULL BODY",
@@ -393,6 +389,8 @@ def workout_page(page, user, go_home=None, go_profile=None):
 
     def upper_body(e):
 
+        print("UPPER BODY CLICKED")
+
         exercise_page(
             "UPPER BODY",
             [
@@ -405,6 +403,8 @@ def workout_page(page, user, go_home=None, go_profile=None):
         )
 
     def lower_body(e):
+
+        print("LOWER BODY CLICKED")
 
         exercise_page(
             "LOWER BODY",
@@ -425,12 +425,8 @@ def workout_page(page, user, go_home=None, go_profile=None):
 
         if go_profile:
             go_profile(e)
-
         else:
-            profile_page(
-                page,
-                user
-            )
+            profile_page(page, user)
 
     def open_home(e):
 
@@ -447,9 +443,7 @@ def workout_page(page, user, go_home=None, go_profile=None):
             bgcolor="#A8E6A3",
             color="#333333",
             elevation=2,
-            shape=RoundedRectangleBorder(
-                radius=10
-            ),
+            shape=RoundedRectangleBorder(radius=10),
 
             text_style=TextStyle(
                 font_family="Fredoka",
@@ -469,9 +463,7 @@ def workout_page(page, user, go_home=None, go_profile=None):
             bgcolor="#A8E6A3",
             color="#333333",
             elevation=2,
-            shape=RoundedRectangleBorder(
-                radius=10
-            ),
+            shape=RoundedRectangleBorder(radius=10),
 
             text_style=TextStyle(
                 font_family="Fredoka",
@@ -491,9 +483,7 @@ def workout_page(page, user, go_home=None, go_profile=None):
             bgcolor="#A8E6A3",
             color="#333333",
             elevation=2,
-            shape=RoundedRectangleBorder(
-                radius=10
-            ),
+            shape=RoundedRectangleBorder(radius=10),
 
             text_style=TextStyle(
                 font_family="Fredoka",
@@ -549,9 +539,7 @@ def workout_page(page, user, go_home=None, go_profile=None):
             color=Colors.WHITE,
             elevation=3,
             shadow_color="#E85F78",
-            shape=RoundedRectangleBorder(
-                radius=28
-            ),
+            shape=RoundedRectangleBorder(radius=28),
 
             text_style=TextStyle(
                 font_family="Fredoka",
@@ -572,9 +560,7 @@ def workout_page(page, user, go_home=None, go_profile=None):
             color=Colors.WHITE,
             elevation=3,
             shadow_color="#E85F78",
-            shape=RoundedRectangleBorder(
-                radius=28
-            ),
+            shape=RoundedRectangleBorder(radius=28),
 
             text_style=TextStyle(
                 font_family="Fredoka",
@@ -595,9 +581,7 @@ def workout_page(page, user, go_home=None, go_profile=None):
             color=Colors.WHITE,
             elevation=3,
             shadow_color="#E85F78",
-            shape=RoundedRectangleBorder(
-                radius=28
-            ),
+            shape=RoundedRectangleBorder(radius=28),
 
             text_style=TextStyle(
                 font_family="Fredoka",
@@ -608,28 +592,28 @@ def workout_page(page, user, go_home=None, go_profile=None):
     )
 
     # ==================================================
-    # MAIN CONTENT
+    # WORKOUT CONTENT
     # ==================================================
 
     workout_content = Column(
 
         controls=[
 
-            Container(height=60),
-
             welcome_text,
+
+            Container(height=8),
 
             subtitle,
 
-            Container(height=25),
+            Container(height=30),
 
             full_body_button,
 
-            Container(height=10),
+            Container(height=12),
 
             upper_body_button,
 
-            Container(height=10),
+            Container(height=12),
 
             lower_body_button,
 
@@ -644,7 +628,20 @@ def workout_page(page, user, go_home=None, go_profile=None):
         ],
 
         horizontal_alignment=CrossAxisAlignment.CENTER,
+        alignment=MainAxisAlignment.CENTER,
         spacing=0,
+    )
+
+    # ==================================================
+    # FAKE CAMERA
+    # ==================================================
+
+    camera_notch = Container(
+        width=120,
+        height=32,
+        bgcolor="#000000",
+        border_radius=20,
+        ignore_interactions=True,
     )
 
     # ==================================================
@@ -658,36 +655,69 @@ def workout_page(page, user, go_home=None, go_profile=None):
         border_radius=35,
     )
 
-    phone.content = Column(
+    # ==================================================
+    # PHONE STACK
+    # ==================================================
 
+    phone.content = Stack(
         controls=[
 
+            # Workout content
             Container(
-                expand=True,
-                content=workout_content,
                 alignment=Alignment(0, 0),
+                content=workout_content,
             ),
 
+            # Camera notch
             Container(
-                height=70,
-                content=navigation_bar,
-                alignment=Alignment(0, 0),
+                alignment=Alignment(0, -0.95),
+                content=camera_notch,
+                ignore_interactions=True,
             ),
         ],
-
-        spacing=0,
     )
 
     # ==================================================
     # DISPLAY
     # ==================================================
 
-    page.add(
+    # IMPORTANT:
+    # Navigation is placed separately so it doesn't create
+    # a giant invisible clickable layer over the workout buttons.
 
+    page.add(
         Container(
             expand=True,
             alignment=Alignment(0, 0),
-            content=phone,
+            padding=25,
+
+            content=Column(
+                controls=[
+
+                    Container(
+                        width=400,
+                        height=850,
+                        content=Stack(
+                            controls=[
+
+                                # Phone
+                                phone,
+
+                                # Navigation only occupies its own row
+                                Container(
+                                    content=navigation_bar,
+                                    top=750,
+                                    left=0,
+                                    width=400,
+                                    ),
+                            ],
+                        ),
+                    ),
+                ],
+
+                horizontal_alignment=CrossAxisAlignment.CENTER,
+                spacing=0,
+            ),
         )
     )
 
