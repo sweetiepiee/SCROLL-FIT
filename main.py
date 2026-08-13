@@ -5,17 +5,13 @@ from profile import profile_page
 from workout import workout_page
 
 
-# Main function that runs the app
 def main(page: Page):
 
     page.title = "Fit Scroll"
+    page.bgcolor = "#080808"
+    page.padding = 0
 
-    # Set the background outside the phone
-    page.bgcolor = "#0808085F"
-    page.window.width = 460
-    page.window.height = 900
-
-    # Stores the currently logged-in user
+    # Currently logged-in user
     current_user = None
 
     # --------------------------------------------------
@@ -31,22 +27,30 @@ def main(page: Page):
 
     def open_home(user):
         nonlocal current_user
+
         current_user = user
 
-        home_page(page, current_user)
+        home_page(
+            page,
+            current_user,
+            go_profile=open_profile,
+            go_workout=open_workout,
+        )
 
     # --------------------------------------------------
     # PROFILE
     # --------------------------------------------------
 
     def open_profile(e=None):
+
         if current_user:
+
             profile_page(
                 page,
                 current_user,
                 go_home=open_home_current,
                 go_workout=open_workout,
-                go_login=open_login
+                go_login=open_login,
             )
 
     # --------------------------------------------------
@@ -54,32 +58,42 @@ def main(page: Page):
     # --------------------------------------------------
 
     def open_home_current(e=None):
+
         if current_user:
-            home_page(page, current_user)
+
+            home_page(
+                page,
+                current_user,
+                go_profile=open_profile,
+                go_workout=open_workout,
+            )
 
     # --------------------------------------------------
     # WORKOUT
     # --------------------------------------------------
 
     def open_workout(e=None):
+
         if current_user:
+
             workout_page(
                 page,
-                current_user
+                current_user,
+                go_home=open_home_current,
+                go_profile=open_profile,
             )
 
     # --------------------------------------------------
     # STARTING SCREEN
     # --------------------------------------------------
 
-    container = Container(
+    phone = Container(
         width=400,
         height=850,
-        bgcolor="#FFE5C7",
+        bgcolor="#FFF4C7",
         border_radius=35,
     )
 
-    # APP LOGO
     logo = Image(
         src="logo.png",
         width=350,
@@ -91,16 +105,16 @@ def main(page: Page):
         "Fit Scroll",
         size=40,
         weight=FontWeight.BOLD,
-        font_family="Fredoka",
+        font_family="Arial",
         color="#E78E19",
         text_align=TextAlign.CENTER,
     )
 
     description = Text(
         "Move more. Scroll less.",
-        font_family="Fredoka",
         size=20,
         weight=FontWeight.W_500,
+        font_family="Fredoka",
         color="#E76119",
         text_align=TextAlign.CENTER,
     )
@@ -109,22 +123,23 @@ def main(page: Page):
         "Get Started!",
         width=220,
         height=55,
+        on_click=open_login,
+
         style=ButtonStyle(
+            bgcolor="#FF7890",
+            color=Colors.WHITE,
+            elevation=5,
+            shadow_color="#E85F78",
+            shape=RoundedRectangleBorder(radius=30),
+
             text_style=TextStyle(
                 font_family="Fredoka",
                 size=20,
                 weight=FontWeight.BOLD,
             ),
-            color=Colors.WHITE,
-            bgcolor="#FF7890",
-            shape=RoundedRectangleBorder(radius=30),
-            elevation=5,
-            shadow_color="#E85F78",
         ),
-        on_click=open_login,
     )
 
-    # Fake Phone Camera
     camera = Container(
         width=120,
         height=32,
@@ -133,18 +148,24 @@ def main(page: Page):
         ignore_interactions=True,
     )
 
-    # Add everything to the page
-    container.content = Stack(
+    phone.content = Stack(
         controls=[
+
             Column(
                 controls=[
                     Container(height=80),
+
                     logo,
+
                     title,
+
                     description,
+
                     Container(height=40),
+
                     start_button,
                 ],
+
                 horizontal_alignment=CrossAxisAlignment.CENTER,
             ),
 
@@ -160,10 +181,21 @@ def main(page: Page):
         Container(
             expand=True,
             alignment=Alignment(0, 0),
-            content=container,
+            content=phone,
         )
     )
 
+    page.update()
 
-# Start the app
-run(main)
+
+# --------------------------------------------------
+# RUN APP IN WEB BROWSER
+# --------------------------------------------------
+
+if __name__ == "__main__":
+    import flet as ft
+
+    ft.run(
+        main,
+        view=ft.AppView.WEB_BROWSER,
+    )

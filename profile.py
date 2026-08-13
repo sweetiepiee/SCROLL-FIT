@@ -72,7 +72,8 @@ def profile_page(page, user, go_home=None, go_workout=None, go_login=None):
     # --------------------------------------------------
 
     def logout(e):
-        go_login(e)
+        if go_login:
+            go_login(e)
 
     logout_button = TextButton(
         "Log out →",
@@ -179,7 +180,7 @@ def profile_page(page, user, go_home=None, go_workout=None, go_login=None):
     # NAVIGATION BUTTONS
     # --------------------------------------------------
 
-    profile_button = ElevatedButton(
+    profile_button = Button(
         "PROFILE",
         width=120,
         height=45,
@@ -197,7 +198,7 @@ def profile_page(page, user, go_home=None, go_workout=None, go_login=None):
         ),
     )
 
-    home_button = ElevatedButton(
+    home_button = Button(
         "HOME",
         width=120,
         height=45,
@@ -215,7 +216,7 @@ def profile_page(page, user, go_home=None, go_workout=None, go_login=None):
         ),
     )
 
-    workout_button = ElevatedButton(
+    workout_button = Button(
         "WORKOUT",
         width=120,
         height=45,
@@ -252,6 +253,7 @@ def profile_page(page, user, go_home=None, go_workout=None, go_login=None):
         height=32,
         bgcolor="#000000",
         border_radius=20,
+        ignore_interactions=True,
     )
 
     # --------------------------------------------------
@@ -260,15 +262,9 @@ def profile_page(page, user, go_home=None, go_workout=None, go_login=None):
 
     profile_content = Column(
         controls=[
-
-            # Move entire profile further down
             Container(height=120),
-
             profile_title,
-
             Container(height=15),
-
-            # Profile picture
             Stack(
                 controls=[
                     profile_icon,
@@ -276,30 +272,18 @@ def profile_page(page, user, go_home=None, go_workout=None, go_login=None):
                 width=120,
                 height=120,
             ),
-
             Container(height=2),
-
             name_text,
-
             logout_button,
-
             Container(height=8),
-
             email_bar,
-
             Container(height=7),
-
             date_of_birth_bar,
-
             Container(height=7),
-
             fitness_level_bar,
-
             Container(height=7),
-
             fitness_goal_bar,
         ],
-
         horizontal_alignment=CrossAxisAlignment.CENTER,
         spacing=0,
         scroll=ScrollMode.AUTO,
@@ -318,27 +302,18 @@ def profile_page(page, user, go_home=None, go_workout=None, go_login=None):
 
     phone.content = Stack(
         controls=[
-
-            # Profile content
             profile_content,
-
-            # Bottom navigation
             Container(
                 alignment=Alignment(0, 0.88),
                 content=navigation_bar,
             ),
-
-            # Fake camera
             Container(
                 alignment=Alignment(0, -0.95),
                 content=camera,
+                ignore_interactions=True,
             ),
         ],
     )
-
-    # --------------------------------------------------
-    # ADD PHONE TO PAGE
-    # --------------------------------------------------
 
     page.add(
         Container(
